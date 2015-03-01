@@ -4,15 +4,13 @@
  */
 package hal.rdfsearch;
 
-import com.hp.hpl.jena.rdf.model.*;
-import com.hp.hpl.jena.util.FileManager;
-import com.hp.hpl.jena.vocabulary.DCTerms;
-import com.hp.hpl.jena.vocabulary.RDFS;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Properties;
 
 /**
@@ -24,11 +22,11 @@ import java.util.Properties;
 public enum RDFSearch {
     ENVIRONMENT;
 
-    /** Nom du fichier de configuration de l'application. */
-    static final String cfgFileName = "RDFSearch.properties";
+    /** Journal. */
+    public static final Logger logger = LoggerFactory.getLogger(RDFSearch.class);
 
     /** Configuration de l'application. */
-    private Properties configuration;
+    public final Properties configuration;
 
     private RDFSearch() {
         configuration = new Properties();
@@ -38,27 +36,45 @@ public enum RDFSearch {
      * Main method of the program.
      * @param args command line arguments
      */
-    public void run(String[] args) throws IOException {
-        chargeConfiguration();
-        Model model = ModelFactory.createDefaultModel();
-        InputStream in = FileManager.get().open(configuration.getProperty("rdf-file"));
-        model.read(in, "");
-
-        ResIterator iter = model.listResourcesWithProperty(DCTerms.title);
-        while (iter.hasNext()) {
-            Resource r = iter.nextResource();
-            System.out.println(r);
+    private void run(String[] args) throws IOException {
+        parseCommandLine(args);
+        if (configuration.getProperty("action").equals("index")) {
+            RDFBookIndexer bookIndexer = new RDFBookIndexer();
+            bookIndexer.indexBooks();
+        } else {
+            // Search
         }
-        System.out.println("Fini !");
+        logger.info("Fin de l'exécution");
     }
 
     /**
-     * Cherche dans les ressources et charge la configuration.
-     * @throws IOException
+     * Analyse la ligne de commande et configure l'application.
+     *
+     * @param args command line arguments
      */
-    public void chargeConfiguration() throws IOException {
-        InputStream cfgInputStream = getClass().getClassLoader().getResourceAsStream(cfgFileName);
-        configuration.load(cfgInputStream);
+    private void parseCommandLine(String[] args) {
+        logger.info("Analyse de la ligne de commande");
+        if (args[0].equals("-i")) { // indexation
+            if (args.length != 2 || !Files.isReadable(Paths.get(args[1]))) {
+                throw new IllegalArgumentException();
+            }
+            configuration.setProperty("action", "index");
+            configuration.setProperty("rdf-file", args[1]);
+            logger.info("Configuration : indexation de {}", args[1]);
+        } else { // recherche
+            configuration.setProperty("action", "search");
+            configuration.setProperty("query", Arrays.toString(args));
+            logger.info("Configuration : recherche de {}", Arrays.toString(args));
+        }
+    }
+
+    /**
+     * Retourne le nom du fichier contenant le jeu de données RDF.
+     *
+     * @return le nom du fichier
+     */
+    public String getRDFFilename() {
+        return configuration.getProperty("rdf-file");
     }
 
     /**
