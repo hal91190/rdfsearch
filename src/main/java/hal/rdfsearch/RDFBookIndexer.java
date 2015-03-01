@@ -87,6 +87,7 @@ public class RDFBookIndexer {
 
         String title = livre.getProperty(DCTerms.title).getString();
         Field titleField = new StringField("title", title, Field.Store.NO);
+        doc.add(titleField);
 
         logger.debug("indexation du livre \"{}\" ({})", title, livre);
         writer.addDocument(doc);

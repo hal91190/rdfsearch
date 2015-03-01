@@ -4,6 +4,8 @@
  */
 package hal.rdfsearch;
 
+import com.hp.hpl.jena.rdf.model.Resource;
+import org.apache.lucene.queryparser.classic.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -26,7 +29,7 @@ public enum RDFSearch {
     public static final Logger logger = LoggerFactory.getLogger(RDFSearch.class);
 
     /** Configuration de l'application. */
-    public final Properties configuration;
+    private final Properties configuration;
 
     private RDFSearch() {
         configuration = new Properties();
@@ -36,13 +39,14 @@ public enum RDFSearch {
      * Main method of the program.
      * @param args command line arguments
      */
-    private void run(String[] args) throws IOException {
+    private void run(String[] args) throws IOException, ParseException {
         parseCommandLine(args);
         if (configuration.getProperty("action").equals("index")) {
             RDFBookIndexer bookIndexer = new RDFBookIndexer();
             bookIndexer.indexBooks();
         } else {
-            // Search
+            RDFBooKSearcher booKSearcher = new RDFBooKSearcher();
+            List<Resource> films = booKSearcher.search();
         }
         logger.info("Fin de l'exécution");
     }
@@ -63,8 +67,9 @@ public enum RDFSearch {
             logger.info("Configuration : indexation de {}", args[1]);
         } else { // recherche
             configuration.setProperty("action", "search");
-            configuration.setProperty("query", Arrays.toString(args));
-            logger.info("Configuration : recherche de {}", Arrays.toString(args));
+            configuration.setProperty("rdf-file", args[0]);
+            configuration.setProperty("query", args[1]);
+            logger.info("Configuration : recherche de \"{}\"", args[1]);
         }
     }
 
@@ -78,10 +83,19 @@ public enum RDFSearch {
     }
 
     /**
+     * Retourne la requête.
+     *
+     * @return la requête
+     */
+    public String getQuery() {
+        return configuration.getProperty("query");
+    }
+
+    /**
      * Class method call by Java VM when starting the application.
      * @param args command line arguments
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParseException {
         ENVIRONMENT.run(args);
     }
 }
