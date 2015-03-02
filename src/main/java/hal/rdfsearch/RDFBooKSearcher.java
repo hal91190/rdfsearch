@@ -69,7 +69,7 @@ public class RDFBooKSearcher {
         Analyzer analyzer = new StandardAnalyzer();
         QueryParser parser = new QueryParser(defaultField, analyzer);
         Query query = parser.parse(ENVIRONMENT.getQuery());
-        TopDocs results = searcher.search(query, 100);
+        TopDocs results = searcher.search(query, 1000);
         ScoreDoc[] hits = results.scoreDocs;
         int numTotalHits = results.totalHits;
         logger.info("{} résultats", numTotalHits);
