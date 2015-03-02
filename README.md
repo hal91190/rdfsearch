@@ -5,6 +5,17 @@ Exemple de projet de recherche par mots-clés dans des données RDF
 Samples of the Linked Open British National Bibliography data
 [lodbnb_books.zip](http://www.bl.uk/bibliographic/datasamples.html)
 
+## Utilisation du projet exemple
+### Indexation du jeu de données RDF
+```
+$ java -cp ... hal.rdfsearch.RDFSearch -i /home/hal/Documents/Devel/rdfsearch/lodbnb_books.rdf
+```
+
+### Recherche dans les données RDF
+```
+$ java -cp ... hal.rdfsearch.RDFSearch /home/hal/Documents/Devel/rdfsearch/lodbnb_books.rdf "-social +life"
+```
+
 ## Références
 ### Gestion de données RDF avec Jena
  * [Site officiel](http://jena.apache.org/) du projet Apache Jena
