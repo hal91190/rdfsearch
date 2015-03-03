@@ -39,12 +39,14 @@ public class RDFBookIndexer {
         logger.info("Indexation des livres, i.e. ressources avec un titre dans le répertoire {}", indexPath);
         Date start = new Date();
 
+        //TODO(index) Création de l'index
         Directory dir = FSDirectory.open(Paths.get(indexPath));
         Analyzer analyzer = new StandardAnalyzer();
         IndexWriterConfig iwc = new IndexWriterConfig(analyzer);
         iwc.setOpenMode(IndexWriterConfig.OpenMode.CREATE); // remplace l'index s'il existe
         IndexWriter writer = new IndexWriter(dir, iwc);
 
+        //TODO(SPARQL) réécrire la portion de code ci-dessous avec SPARQL
         ResIterator iter = ENVIRONMENT.bookModel.listResourcesWithProperty(DCTerms.title);
         while (iter.hasNext()) {
             Resource r = iter.nextResource();
@@ -64,6 +66,7 @@ public class RDFBookIndexer {
      * @param writer l'index
      */
     private void indexBook(Resource livre, IndexWriter writer) throws IOException {
+        //TODO(index) indexation d'un document
         Document doc = new Document();
 
         Field uriField = new StringField("uri", livre.getURI(), Field.Store.YES);
@@ -72,6 +75,8 @@ public class RDFBookIndexer {
         String title = livre.getProperty(DCTerms.title).getString();
         Field titleField = new TextField("title", title, Field.Store.NO);
         doc.add(titleField);
+
+        //TODO(new fields) ajouter l'indexation de l'isbn et des auteurs
 
         logger.debug("indexation du livre \"{}\" ({})", title, livre);
         writer.addDocument(doc);

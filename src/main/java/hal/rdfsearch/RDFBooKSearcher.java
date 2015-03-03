@@ -46,6 +46,8 @@ public class RDFBooKSearcher {
      */
     public List<Resource> search() throws IOException, ParseException {
         logger.info("Exécution de la requête \"{}\" sur l'index {}", ENVIRONMENT.getQuery(), indexPath);
+
+        //TODO(search)
         IndexReader reader = DirectoryReader.open(FSDirectory.open(Paths.get(indexPath)));
         IndexSearcher searcher = new IndexSearcher(reader);
         Analyzer analyzer = new StandardAnalyzer();

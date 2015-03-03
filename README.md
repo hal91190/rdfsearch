@@ -16,6 +16,31 @@ $ java -cp ... hal.rdfsearch.RDFSearch -i /home/hal/Documents/Devel/rdfsearch/lo
 $ java -cp ... hal.rdfsearch.RDFSearch /home/hal/Documents/Devel/rdfsearch/lodbnb_books.rdf "-social +life"
 ```
 
+## Questions
+### Exploration du jeu de données
+ * Quelles données sont décrites dans ce fichier RDF ?
+ * Quels vocabulaires RDF sont utilisés dans ce document ? Que représentent-ils ?
+ * De quel type sont les livres ?
+ * Quel propriété représente les auteurs d'un livre ?
+
+### Gestion de données RDF avec Jena
+ * Quelle interface de la bibliothèque Jena représente un jeu de données RDF (ensemble de triplets) ?
+ * Quelles étapes permettent de créer et de charger un jeu de données RDF à partir d'un fichier ?
+ * Quelles méthodes permettent de naviguer dans un jeu de données RDF ?
+ * Comment utiliser le langage SPARQL avec la bibliothèque Jena ?
+   Chercher la chaîne "TODO(SPARQL)" dans le projet.
+
+### Indexation avec Lucene
+ * Expliquer le code de construction d'un index Lucene ("TODO(index)")
+ ** En particulier, quel est le rôle de l'analyseur ?
+ ** Quels rôles jouent le document et les différents types de champs (StringField, TextField, ...) ?
+ * Ajouter l'indexation de l'isbn et des auteurs ("TODO(new fields)")
+
+### Rechercher dans l'index Lucene
+ * Expliquer le code de recherche dans un index Lucene ("TODO(search)")
+ ** En particulier, quels rôles jouent les classes QueryParser, Query, TopDocs et ScoreDoc ?
+ * Générer une page HTML présentant les résultats de la recherche (titre du document, score et lien la page de la *British Library*)
+
 ## Références
 ### Gestion de données RDF avec Jena
  * [Site officiel](http://jena.apache.org/) du projet Apache Jena

@@ -65,10 +65,11 @@ public enum RDFSearch {
      * qui analyse les arguments de ligne de dommande.
      *
      */
-    private void loadRDFData() {
+    private void loadRDFData() throws IOException {
         logger.info("Initialisation du modèle Jena à partir de {}", getRDFFilename());
         InputStream in = FileManager.get().open(getRDFFilename());
         bookModel.read(in, null);
+        in.close();
     }
 
     /**
