@@ -1,10 +1,7 @@
 package hal.rdfsearch;
 
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.DCTerms;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -20,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.Date;
 
@@ -39,19 +35,6 @@ public class RDFBookIndexer {
     /** Répertoire où sera stocké l'index. */
     public static final String indexPath = "index";
 
-    /** Modèle Jena pour les livres. */
-    private Model bookModel;
-
-    /**
-     * Initialise le modèle à partir du jeu de données RDF.
-     */
-    public RDFBookIndexer() {
-        logger.info("Initialisation du modèle Jena à partir de {}", ENVIRONMENT.getRDFFilename());
-        bookModel = ModelFactory.createDefaultModel();
-        InputStream in = FileManager.get().open(ENVIRONMENT.getRDFFilename());
-        bookModel.read(in, "");
-    }
-
     public void indexBooks() throws IOException {
         logger.info("Indexation des livres, i.e. ressources avec un titre dans le répertoire {}", indexPath);
         Date start = new Date();
@@ -62,7 +45,7 @@ public class RDFBookIndexer {
         iwc.setOpenMode(IndexWriterConfig.OpenMode.CREATE); // remplace l'index s'il existe
         IndexWriter writer = new IndexWriter(dir, iwc);
 
-        ResIterator iter = bookModel.listResourcesWithProperty(DCTerms.title);
+        ResIterator iter = ENVIRONMENT.bookModel.listResourcesWithProperty(DCTerms.title);
         while (iter.hasNext()) {
             Resource r = iter.nextResource();
             indexBook(r, writer);

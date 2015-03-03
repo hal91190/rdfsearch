@@ -1,9 +1,6 @@
 package hal.rdfsearch;
 
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.util.FileManager;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -20,13 +17,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 import static hal.rdfsearch.RDFSearch.ENVIRONMENT;
-import static hal.rdfsearch.RDFSearch.logger;
 
 /**
  * Permet la recherche dans l'index des livres.
@@ -38,24 +33,11 @@ public class RDFBooKSearcher {
     /** Journal. */
     public static final Logger logger = LoggerFactory.getLogger(RDFBooKSearcher.class);
 
-    /** Répertoire où sera stocké l'index. */
+    /** Répertoire où est stocké l'index. */
     public static final String indexPath = "index";
 
     /** Champs de recherche par défaut. */
     public static final String defaultField = "title";
-
-    /** Modèle Jena pour les livres. */
-    private Model bookModel;
-
-    /**
-     * Initialise le modèle à partir du jeu de données RDF.
-     */
-    public RDFBooKSearcher() {
-        logger.info("Initialisation du modèle Jena à partir de {}", ENVIRONMENT.getRDFFilename());
-        bookModel = ModelFactory.createDefaultModel();
-        InputStream in = FileManager.get().open(ENVIRONMENT.getRDFFilename());
-        bookModel.read(in, "");
-    }
 
     /**
      * Recherche les livres à partir de l'index.
@@ -79,7 +61,7 @@ public class RDFBooKSearcher {
             logger.trace("Document {} ({})", doc.get("uri"), hits[i].score);
             String uri = doc.get("uri");
             if (uri != null) {
-                Resource film = bookModel.getResource(uri);
+                Resource film = ENVIRONMENT.bookModel.getResource(uri);
                 films.add(film);
             }
         }
