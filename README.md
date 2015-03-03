@@ -32,13 +32,13 @@ $ java -cp ... hal.rdfsearch.RDFSearch /home/hal/Documents/Devel/rdfsearch/lodbn
 
 ### Indexation avec Lucene
  * Expliquer le code de construction d'un index Lucene ("TODO(index)")
- ** En particulier, quel est le rôle de l'analyseur ?
- ** Quels rôles jouent le document et les différents types de champs (StringField, TextField, ...) ?
+  * En particulier, quel est le rôle de l'analyseur ?
+  * Quels rôles jouent le document et les différents types de champs (StringField, TextField, ...) ?
  * Ajouter l'indexation de l'isbn et des auteurs ("TODO(new fields)")
 
 ### Rechercher dans l'index Lucene
  * Expliquer le code de recherche dans un index Lucene ("TODO(search)")
- ** En particulier, quels rôles jouent les classes QueryParser, Query, TopDocs et ScoreDoc ?
+  * En particulier, quels rôles jouent les classes QueryParser, Query, TopDocs et ScoreDoc ?
  * Générer une page HTML présentant les résultats de la recherche (titre du document, score et lien la page de la *British Library*)
 
 ## Références
