@@ -26,7 +26,7 @@ $ /gradlew run -Dexec.args="lodbnb_books.rdf '-social +life'"
  * Quelles données sont décrites dans ce fichier RDF ?
  * Quels vocabulaires RDF sont utilisés dans ce document ? Que représentent-ils ?
  * De quel type sont les livres ?
- * Quel propriété représente les auteurs d'un livre ?
+ * Quelle propriété représente les auteurs d'un livre ?
 
 ### Gestion de données RDF avec Jena
  * Quelle interface de la bibliothèque Jena représente un jeu de données RDF (ensemble de triplets) ?
