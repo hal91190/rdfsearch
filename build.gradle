@@ -6,6 +6,9 @@ mainClassName = 'hal.rdfsearch.RDFSearch'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+def jenaVersion = '3.1.1'
+def luceneVersion = '6.4.0'
+
 repositories {
     jcenter()
 }
@@ -17,17 +20,17 @@ dependencies {
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
-    compile(group: 'org.apache.jena', name: 'apache-jena-libs', version: '3.1.1') {
+    compile(group: 'org.apache.jena', name: 'apache-jena-libs', version: jenaVersion) {
         exclude(module: 'slf4j-log4j12')
         exclude(module: 'log4j')
     }
 
-    compile group: 'org.apache.lucene', name: 'lucene-core', version: '5.0.0'
-    compile group: 'org.apache.lucene', name: 'lucene-analyzers-common', version: '5.0.0'
-    compile group: 'org.apache.lucene', name: 'lucene-queryparser', version: '5.0.0'
+    compile group: 'org.apache.lucene', name: 'lucene-core', version: luceneVersion
+    compile group: 'org.apache.lucene', name: 'lucene-analyzers-common', version: luceneVersion
+    compile group: 'org.apache.lucene', name: 'lucene-queryparser', version: luceneVersion
 }
 
 run {
     // Need to split the space-delimited value in the exec.args
-    //args System.getProperty('exec.args').split()
+    args System.getProperty('exec.args').split()
 }
