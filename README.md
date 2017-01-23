@@ -8,25 +8,17 @@ Samples of the Linked Open British National Bibliography data
 ## Utilisation du projet exemple
 ### Compilation
 ```
-$ mvn package
+$ ./gradlew build
 ```
 
 ### Indexation du jeu de données RDF
 ```
-$ java -jar target/rdfsearch-1.0-SNAPSHOT.jar -i lodbnb_books.rdf
-```
-ou
-```
-$ java -cp ... hal.rdfsearch.RDFSearch -i /home/hal/Documents/Devel/rdfsearch/lodbnb_books.rdf
+$ ./gradlew run -Dexec.args="-i lodbnb_books.rdf"
 ```
 
 ### Recherche dans les données RDF
 ```
-java -jar target/rdfsearch-1.0-SNAPSHOT.jar lodbnb_books.rdf "-social +life"
-```
-ou
-```
-$ java -cp ... hal.rdfsearch.RDFSearch /home/hal/Documents/Devel/rdfsearch/lodbnb_books.rdf "-social +life"
+$ /gradlew run -Dexec.args="lodbnb_books.rdf '-social +life'"
 ```
 
 ## Questions

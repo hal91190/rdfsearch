@@ -1,4 +1,7 @@
 apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "hal.rdfsearch.RDFSearch"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -22,4 +25,9 @@ dependencies {
     compile group: 'org.apache.lucene', name: 'lucene-core', version: '5.0.0'
     compile group: 'org.apache.lucene', name: 'lucene-analyzers-common', version: '5.0.0'
     compile group: 'org.apache.lucene', name: 'lucene-queryparser', version: '5.0.0'
+}
+
+run {
+    /* Need to split the space-delimited value in the exec.args */
+    args System.getProperty("exec.args").split()
 }
