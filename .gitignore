@@ -19,3 +19,4 @@ gradle-app.setting
 # Data files
 *.rdf
 index/
+rdfsearch.iml

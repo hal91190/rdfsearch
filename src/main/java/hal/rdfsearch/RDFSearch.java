@@ -7,13 +7,11 @@ package hal.rdfsearch;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.util.FileManager;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -67,9 +65,7 @@ public enum RDFSearch {
      */
     private void loadRDFData() throws IOException {
         logger.info("Initialisation du modèle Jena à partir de {}", getRDFFilename());
-        InputStream in = FileManager.get().open(getRDFFilename());
-        bookModel.read(in, null);
-        in.close();
+        bookModel.read(getRDFFilename());
     }
 
     /**

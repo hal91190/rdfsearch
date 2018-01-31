@@ -1,5 +1,7 @@
-apply plugin: 'java'
-apply plugin: 'application'
+plugins {
+    id 'java'
+    id 'application'
+}
 
 mainClassName = 'hal.rdfsearch.RDFSearch'
 
@@ -28,9 +30,4 @@ dependencies {
     compile group: 'org.apache.lucene', name: 'lucene-core', version: luceneVersion
     compile group: 'org.apache.lucene', name: 'lucene-analyzers-common', version: luceneVersion
     compile group: 'org.apache.lucene', name: 'lucene-queryparser', version: luceneVersion
-}
-
-run {
-    // Need to split the space-delimited value in the exec.args
-    args System.getProperty('exec.args').split()
 }

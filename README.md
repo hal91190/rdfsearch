@@ -11,14 +11,19 @@ Samples of the Linked Open British National Bibliography data
 $ ./gradlew build
 ```
 
+### Extraction de l'application
+```
+$ tar xf build/distributions/rdfsearch.tar
+```
+
 ### Indexation du jeu de données RDF
 ```
-$ ./gradlew run -Dexec.args="-i lodbnb_books.rdf"
+$ rdfsearch/bin/rdfsearch -i BNBLODB_sample.nt
 ```
 
 ### Recherche dans les données RDF
 ```
-$ /gradlew run -Dexec.args="lodbnb_books.rdf '-social +life'"
+$ rdfsearch/bin/rdfsearch BNBLODB_sample.nt '-social +life'
 ```
 
 ## Questions
