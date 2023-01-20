@@ -5,25 +5,24 @@ Exemple de projet de recherche par mots-clés dans des données RDF
 Samples of the Linked Open British National Bibliography data
 [lodbnb_books.zip](http://www.bl.uk/bibliographic/datasamples.html)
 
+* [Publishing the British National Bibliography as Linked Open Data](https://www.bl.uk/bibliographic/pdfs/publishing_bnb_as_lod.pdf)
+* [British Library Data Model - Book](https://www.bl.uk/bibliographic/pdfs/bldatamodelbook.pdf)
+* [British Library Data Model - Seria l](https://www.bl.uk/bibliographic/pdfs/bldatamodelserial.pdf)
+
 ## Utilisation du projet exemple
 ### Compilation
 ```
 $ ./gradlew build
 ```
 
-### Extraction de l'application
-```
-$ tar xf build/distributions/rdfsearch.tar
-```
-
 ### Indexation du jeu de données RDF
 ```
-$ rdfsearch/bin/rdfsearch -i BNBLODB_sample.nt
+$ ./gradlew run --args="-i BNBLODB_sample.nt"
 ```
 
 ### Recherche dans les données RDF
 ```
-$ rdfsearch/bin/rdfsearch BNBLODB_sample.nt '-social +life'
+$ ./gradlew run --args="BNBLODB_sample.nt '-social +life'"
 ```
 
 ## Questions
@@ -55,6 +54,10 @@ $ rdfsearch/bin/rdfsearch BNBLODB_sample.nt '-social +life'
 ### Gestion de données RDF avec Jena
  * [Site officiel](http://jena.apache.org/) du projet Apache Jena
  * [Tutoriels Jena](http://jena.apache.org/tutorials/index.html)
+   * [Introduction au RDF et à l'API RDF de Jena](https://web-semantique.developpez.com/tutoriels/jena/introduction-rdf/)
+   * [ARQ - API Application](https://web-semantique.developpez.com/tutoriels/jena/arq/api-application/)
+   * [Comment utiliser les entrées/sorties RDF de Jena](https://web-semantique.developpez.com/tutoriels/jena/io/)
+   * [Le tutoriel SPARQL](https://web-semantique.developpez.com/tutoriels/jena/arq/introduction-sparql/)
  * [Référence de l'API](http://jena.apache.org/documentation/javadoc/jena/)
  * [Introduction to Jena](http://www.ibm.com/developerworks/library/j-jena/), IBM developerWorks
 
