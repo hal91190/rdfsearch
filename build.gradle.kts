@@ -23,7 +23,7 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:1.4.5")
     implementation("ch.qos.logback:logback-core:1.4.5")
 
-    testImplementation("junit:junit:4.12")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")
 
     implementation("org.apache.jena:apache-jena-libs:$jenaVersion") {
         exclude(module = "slf4j-log4j12")

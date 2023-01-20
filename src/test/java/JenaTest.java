@@ -2,11 +2,11 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.VCARD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Test minimal de l'API Jena..
@@ -22,7 +22,7 @@ public class JenaTest {
 
     Model rdfGraph;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         rdfGraph = ModelFactory.createDefaultModel();
         Resource sLopes = rdfGraph.createResource(uri)
@@ -36,9 +36,12 @@ public class JenaTest {
     @Test
     public void simpleModelBuilding() {
         Resource sLopes = rdfGraph.getResource(uri);;
-        assertThat("Le nom complet est incorrect.", sLopes.getProperty(VCARD.FN).getString(), is(fullName));
+        assertEquals("Le nom complet est incorrect.", sLopes.getProperty(VCARD.FN).getString(), fullName);
+
         Resource name = sLopes.getProperty(VCARD.N).getResource();
-        assertThat("Le prénom est incorrect.", name.getProperty(VCARD.Given).getString(), is(givenName));
-        assertThat("Le nom de famille est incorrect.", name.getProperty(VCARD.Family).getString(), is(familyName));
+        assertAll("Nom et prénom",
+          () -> assertEquals("Le prénom est incorrect.", name.getProperty(VCARD.Given).getString(), givenName),
+          () -> assertEquals("Le nom de famille est incorrect.", name.getProperty(VCARD.Family).getString(), familyName)
+        );
     }
 }
