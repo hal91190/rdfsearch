@@ -19,9 +19,9 @@ repositories {
 }
 
 dependencies {
-    implementation("org.slf4j:slf4j-api:1.7.10")
-    implementation("ch.qos.logback:logback-classic:1.1.2")
-    implementation("ch.qos.logback:logback-core:1.1.2")
+    implementation("org.slf4j:slf4j-api:2.0.6")
+    implementation("ch.qos.logback:logback-classic:1.4.5")
+    implementation("ch.qos.logback:logback-core:1.4.5")
 
     testImplementation("junit:junit:4.12")
 
