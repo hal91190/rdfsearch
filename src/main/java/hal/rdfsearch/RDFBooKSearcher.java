@@ -55,7 +55,7 @@ public class RDFBooKSearcher {
         Query query = parser.parse(ENVIRONMENT.getQuery());
         TopDocs results = searcher.search(query, 1000);
         ScoreDoc[] hits = results.scoreDocs;
-        int numTotalHits = results.totalHits;
+        int numTotalHits = hits.length;
         logger.info("{} résultats", numTotalHits);
         List<Resource> films = new ArrayList<>(numTotalHits);
         for (int i = 0; i < numTotalHits; i++) {

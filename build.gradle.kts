@@ -11,8 +11,8 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-val jenaVersion = "3.1.1"
-val luceneVersion = "6.4.0"
+val jenaVersion = "4.7.0"
+val luceneVersion = "8.11.2"
 
 repositories {
     mavenCentral()
