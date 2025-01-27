@@ -36,12 +36,12 @@ public class JenaTest {
     @Test
     public void simpleModelBuilding() {
         Resource sLopes = rdfGraph.getResource(uri);;
-        assertEquals("Le nom complet est incorrect.", sLopes.getProperty(VCARD.FN).getString(), fullName);
+        assertEquals("Stéphane Lopes", sLopes.getProperty(VCARD.FN).getString(), fullName);
 
         Resource name = sLopes.getProperty(VCARD.N).getResource();
         assertAll("Nom et prénom",
-          () -> assertEquals("Le prénom est incorrect.", name.getProperty(VCARD.Given).getString(), givenName),
-          () -> assertEquals("Le nom de famille est incorrect.", name.getProperty(VCARD.Family).getString(), familyName)
+          () -> assertEquals("Stéphane", name.getProperty(VCARD.Given).getString(), givenName),
+          () -> assertEquals("Lopes", name.getProperty(VCARD.Family).getString(), familyName)
         );
     }
 }

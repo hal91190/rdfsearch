@@ -6,6 +6,7 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.index.StoredFields;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
@@ -54,12 +55,13 @@ public class RDFBooKSearcher {
         QueryParser parser = new QueryParser(defaultField, analyzer);
         Query query = parser.parse(ENVIRONMENT.getQuery());
         TopDocs results = searcher.search(query, 1000);
+        StoredFields storedFields = searcher.storedFields();
         ScoreDoc[] hits = results.scoreDocs;
         int numTotalHits = hits.length;
         logger.info("{} résultats", numTotalHits);
         List<Resource> films = new ArrayList<>(numTotalHits);
         for (int i = 0; i < numTotalHits; i++) {
-            Document doc = searcher.doc(hits[i].doc);
+            Document doc = storedFields.document(hits[i].doc);
             logger.trace("Document {} ({})", doc.get("uri"), hits[i].score);
             String uri = doc.get("uri");
             if (uri != null) {
