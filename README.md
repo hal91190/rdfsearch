@@ -2,12 +2,7 @@
 Exemple de projet de recherche par mots-clés dans des données RDF
 
 ## Jeu de données RDF
-Samples of the Linked Open British National Bibliography data
-[lodbnb_books.zip](http://www.bl.uk/bibliographic/datasamples.html)
-
-* [Publishing the British National Bibliography as Linked Open Data](https://www.bl.uk/bibliographic/pdfs/publishing_bnb_as_lod.pdf)
-* [British Library Data Model - Book](https://www.bl.uk/bibliographic/pdfs/bldatamodelbook.pdf)
-* [British Library Data Model - Seria l](https://www.bl.uk/bibliographic/pdfs/bldatamodelserial.pdf)
+Le jeu de données est disponible dans l'espace ecampus de l'UE.
 
 ## Utilisation du projet exemple
 ### Compilation
